@@ -10,6 +10,9 @@ export default class {
 
     static async getItemById(req: Request, res: Response, next: Function) {
         let item = await repo.getItemById(req.params.id)
+        if(!item){
+            return res.status(404).send(item);
+        }
         return res.send({ item });
     }
 
@@ -38,7 +41,7 @@ export default class {
             const err: Error = new Error("Item id is required.");
             return next(err)
         }
-        let deleted = await repo.deleteItem(req.params.itemId);
+        let deleted = await repo.deleteItem(Number(req.params.itemId));
         return res.send({ success: deleted });
     }
 

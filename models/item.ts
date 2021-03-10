@@ -5,7 +5,7 @@ export default class {
         this.price = price;
     }
 
-    id!: string;
+    id!: number;
     name!: string;
     price!: number;
 }

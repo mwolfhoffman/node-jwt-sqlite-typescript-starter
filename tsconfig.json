@@ -1,12 +1,29 @@
 {
-    "compilerOptions": {
-      "target": "es2016",
-      "module": "commonjs",
-      "outDir": "./dist",
-      "strict": true,
-      "esModuleInterop": true,
-      "inlineSourceMap": true,
-      "noImplicitAny": false,
-      "types": [ "node" ]
-    }
-  }
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "inlineSourceMap": true,
+    "noImplicitAny": false,
+    "types": [
+      "node",
+      "reflect-metadata",
+      "jest"
+    ],
+    "typeRoots": [
+      "./types",
+      "./node_modules/@types"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts",
+    "**/*.test.ts"
+  ],
+  "include": [
+    "./src/**/*.tsx",
+    "./src/**/*.ts"
+  ]
+}
