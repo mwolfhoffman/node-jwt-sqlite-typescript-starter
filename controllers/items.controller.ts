@@ -1,7 +1,10 @@
+import { Controller, Get, Route } from "tsoa";
 import repo from '../repositories/item.repository';
 
-export default class {
-    static async getAllItems(req, res) {
+@Route("items")
+export default class ItemController extends Controller{
+    @Get("/")
+    public static async getAllItems(req, res) {
         let items = await repo.getAllItems();
         return res.send({ items });
     };

@@ -73,3 +73,7 @@ You will receive an access_token response.  This is to be sent as your "Access-T
 ## Signup
 
 I also added a sign up route to this project (which did not exist in the vanilla JS version). A request body with an email and password to the `/api/auth/signup` will create a new user. Upon successful response, a user can make a `GET` request with the same body to the `/api/auth/login` endpoint to receieve and `access-token`.
+
+## Documentation with Swagger
+
+Navigating to `/swagger` with your browser will open the Swagger documentation that is provided.

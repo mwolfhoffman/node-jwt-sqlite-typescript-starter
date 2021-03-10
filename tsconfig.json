@@ -7,6 +7,9 @@
       "esModuleInterop": true,
       "inlineSourceMap": true,
       "noImplicitAny": false,
-      "types": [ "node" ]
+      "types": [ "node" ],
+      "resolveJsonModule": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
     }
   }
