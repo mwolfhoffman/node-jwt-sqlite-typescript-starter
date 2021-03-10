@@ -8,6 +8,13 @@ export default class {
 
     static setupDbForDev() {
         db.serialize(function () {
+            //   Drop Tables:
+            const dropUsersTable = "DROP TABLE IF EXISTS users";
+            db.run(dropUsersTable);
+            const dropItemsTable = "DROP TABLE IF EXISTS items";
+            db.run(dropItemsTable);
+            
+            // Create Tables:
             const createUsersTable = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT, password text)";
             db.run(createUsersTable);
             const createItemsTable = "CREATE TABLE IF NOT EXISTS items (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, price NUMERIC)";

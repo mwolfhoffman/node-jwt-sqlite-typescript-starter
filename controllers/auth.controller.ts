@@ -71,3 +71,15 @@ export const login = async (req, res) => {
     }
   });
 }
+
+export const signup = async (req: Request, res: Response) => {
+  const user: User = req.body;
+  const created: boolean = await repository.createUser(user)
+
+  if (created) {
+    return res.send("Success! You have successfully signed up. Please login to continue.");
+  } else {
+    const error: Error = new Error("Oh no! There was an error signing up. Please try again.");
+    return res.status(500).send({ error: error.message });
+  }
+}
