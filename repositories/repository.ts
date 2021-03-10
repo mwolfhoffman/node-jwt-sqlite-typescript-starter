@@ -12,8 +12,8 @@ export default class {
         return await dao.get("SELECT * FROM items WHERE id = ?", [id])
     }
 
-    static async getUserByUsername(username) {
-        return dao.get("SELECT * FROM users WHERE username =?", [username]);
+    static async getUserByEmail(email) {
+        return dao.get("SELECT * FROM users WHERE email =?", [email]);
     }
 
     static async getUserById(id) {

@@ -1,15 +1,12 @@
 import * as sqlite from 'sqlite3'
 const sqlite3 = sqlite.verbose();
-const db = new sqlite3.Database(':memory:');
+const db = new sqlite3.Database('./db/sqlite.db');
 import * as bcrypt from 'bcrypt';
 const saltRounds = 10;
-
-
 
 export default class {
 
     static setupDbForDev() {
-        //  This sets up a DB in memory to be used by creating tables, inserting values, etc.
         db.serialize(function () {
             const createUsersTable = "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT,email TEXT, password text)";
             db.run(createUsersTable);

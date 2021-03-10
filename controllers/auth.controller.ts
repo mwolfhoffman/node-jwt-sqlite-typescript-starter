@@ -9,14 +9,16 @@ const {
   APP_SECRET = 'secret' } = process.env;
 
 const encodeToken = (tokenData) => {
-  return njwt.create(tokenData, APP_SECRET).compact();
+  const token = njwt.create(tokenData, APP_SECRET)
+  token.setExpiration(new Date().getTime() + (60 * 60 * 1000 * 24 * 7)); // One week from now
+  return token.compact()
 }
 
 const decodeToken = (token) => {
-  return njwt.verify(token, APP_SECRET).setExpiration(new Date().getTime() + 604800000).body; //1 week
+  return njwt.verify(token, APP_SECRET);
 }
 
-export const authMiddleware = async (req:Request, res:Response, next:Function) => {
+export const authMiddleware = async (req: Request, res: Response, next: Function) => {
   const token = req.header('Access-Token');
   if (!token) {
     return next();
@@ -24,8 +26,8 @@ export const authMiddleware = async (req:Request, res:Response, next:Function) =
 
   try {
     const decoded = decodeToken(token);
-    const { userId } = decoded;
-    const user:User =<User>await repository.getUserById(userId)
+    const { userId } = decoded.body;
+    const user: User = <User>await repository.getUserById(userId)
     if (user) {
       req.body.userId = userId;
     }
@@ -36,7 +38,7 @@ export const authMiddleware = async (req:Request, res:Response, next:Function) =
 };
 
 export const authenticated = (req, res, next) => {
-  if (req.userId) {
+  if (req.body.userId) {
     return next();
   }
 
@@ -51,10 +53,10 @@ const returnInvalidCredentials = (res) => {
 }
 
 export const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
 
-  const user = <User>await repository.getUserByUsername(username)
+  const user = <User>await repository.getUserByEmail(email)
 
   if (!user) {
     returnInvalidCredentials(res)
