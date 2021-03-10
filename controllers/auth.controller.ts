@@ -7,6 +7,7 @@ import User from '../models/user';
 const APP_SECRET: string = <string>process.env.APP_SECRET;
 
 const encodeToken = (tokenData) => {
+  console.log(APP_SECRET)
   const token = njwt.create(tokenData, APP_SECRET)
   token.setExpiration(new Date().getTime() + (60 * 60 * 1000 * 24 * 7)); // One week from now
   return token.compact()
