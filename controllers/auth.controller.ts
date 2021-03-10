@@ -1,12 +1,10 @@
 import njwt from 'njwt';
-import repository from '../repositories/repository';
+import repo from '../repositories/user.repository';
 import * as  bcrypt from 'bcrypt';
 import { Request, Response } from 'express'
 import User from '../models/user';
 
-
-const {
-  APP_SECRET = 'secret' } = process.env;
+const APP_SECRET: string = <string>process.env.APP_SECRET;
 
 const encodeToken = (tokenData) => {
   const token = njwt.create(tokenData, APP_SECRET)
@@ -27,7 +25,7 @@ export const authMiddleware = async (req: Request, res: Response, next: Function
   try {
     const decoded = decodeToken(token);
     const { userId } = decoded.body;
-    const user: User = <User>await repository.getUserById(userId)
+    const user: User = <User>await repo.getUserById(userId)
     if (user) {
       req.body.userId = userId;
     }
@@ -56,7 +54,7 @@ export const login = async (req, res) => {
   const { email, password } = req.body;
 
 
-  const user = <User>await repository.getUserByEmail(email)
+  const user = <User>await repo.getUserByEmail(email)
 
   if (!user) {
     returnInvalidCredentials(res)
@@ -74,7 +72,7 @@ export const login = async (req, res) => {
 
 export const signup = async (req: Request, res: Response) => {
   const user: User = req.body;
-  const created: boolean = await repository.createUser(user)
+  const created: boolean = await repo.createUser(user)
 
   if (created) {
     return res.send("Success! You have successfully signed up. Please login to continue.");
