@@ -1,6 +1,6 @@
 # Node-JWT-Sqlite-TypeScript-Starter
 
-This is an updated version of my older repo that was written using vanilla JS. I just about always use TypeScript now for my node APIs so this repo includes TS.
+This is an updated version of my older <a taret="_blank" href="https://github.com/mwolfhoffman/node-jwt-sqlite-starter">node-jwt-sqlite starter</a> repo that was written using vanilla JS. I just about always use TypeScript now for my node APIs so this repo includes TS and a few new features.
 
 This is a fast, simple, and lightweight starter for node.js REST APIs. It uses `sqlite3` for data storage and `njwt` and `bcrypt` for safe authentication with hashed passwords and JWT. 
 
