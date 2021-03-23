@@ -58,7 +58,7 @@ export const login = async (req, res) => {
   const user = <User>await repo.getUserByEmail(email)
 
   if (!user) {
-    returnInvalidCredentials(res)
+    return returnInvalidCredentials(res)
   }
 
   bcrypt.compare(password, user.password, (err, result) => {
