@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import express from 'express';
-import bodyParser from 'body-parser';
 import dao from './repositories/dao';
 import { authenticated, authMiddleware } from './controllers/auth.controller';
 import authRoutes from './routes/auth.routes';
@@ -11,7 +10,7 @@ const port = 3000;
 export const app = express();
 
 app.listen(port, () => console.log(`Authentication example app listening on port ${port}!`));
-app.use(bodyParser.json());
+app.use(express.json())
 app.use(authMiddleware);
 
 
